@@ -43,7 +43,7 @@ xlsx_to_csv_converter/
 Clone the repository:
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/Kaushal1122/xlsx_to_csv_converter.git
 cd xlsx_to_csv_converter
 ```
 
@@ -76,10 +76,12 @@ python converter.py path/to/workbook.xlsx
 ### 2. Convert a Google Sheets spreadsheet
 
 ```bash
-python converter.py "https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit"
+python converter.py "https://docs.google.com/spreadsheets/d/1jFpj6RY4hW0tZ56bYepVOYC5AkAIRJYpozgmi4_pzak/edit?usp=sharing"
 ```
 
 The Google spreadsheet must be publicly accessible or shared with anyone who has the link as a viewer.
+
+**Sample Google Sheets spreadsheet:** [Open the sample spreadsheet](https://docs.google.com/spreadsheets/d/1jFpj6RY4hW0tZ56bYepVOYC5AkAIRJYpozgmi4_pzak/edit?usp=sharing)
 
 ### 3. Specify a configuration file
 
@@ -150,6 +152,7 @@ python -m ruff check .
 - Logging
 - Pytest
 - Ruff
+- GitHub Actions
 
 ## Assumptions
 
@@ -157,3 +160,7 @@ python -m ruff check .
 - Each worksheet contains exactly one header row.
 - Google Sheets must be accessible without authentication.
 - Each worksheet is exported as an individual CSV file.
+
+## Repository
+
+GitHub: [Kaushal1122/xlsx_to_csv_converter](https://github.com/Kaushal1122/xlsx_to_csv_converter)
