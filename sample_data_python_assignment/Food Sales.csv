@@ -1,11 +1,11 @@
 OrderID,Item,Category,Quantity,UnitPrice,TotalPrice,Region,OrderDate
-2001.0,Ground Coffee (1kg),Beverages,10.0,12.0,120.0,West,2024-02-01
-2002.0,Green Tea Bags (Box of 100),Beverages,15.0,8.5,127.5,East,2024-02-02
-2003.0,Granola Bars (Box of 24),Snacks,30.0,6.75,202.5,North,2024-02-03
-2004.0,Mixed Nuts (500g),Snacks,20.0,9.4,188.0,South,2024-02-05
-2005.0,Bottled Water (Case of 24),Beverages,22.0,5.2,114.4,West,2024-02-06
-2006.0,Potato Chips (Box of 20),Snacks,18.0,7.1,127.8,East,2024-02-08
-2007.0,"Orange Juice (1L, Case of 12)",Beverages,12.0,15.6,187.2,North,2024-02-09
+2001,Ground Coffee (1kg),Beverages,10,12,120,West,2024-02-01
+2002,Green Tea Bags (Box of 100),Beverages,15,8.5,127.5,East,2024-02-02
+2003,Granola Bars (Box of 24),Snacks,30,6.75,202.5,North,2024-02-03
+2004,Mixed Nuts (500g),Snacks,20,9.4,188,South,2024-02-05
+2005,Bottled Water (Case of 24),Beverages,22,5.2,114.4,West,2024-02-06
+2006,Potato Chips (Box of 20),Snacks,18,7.1,127.8,East,2024-02-08
+2007,"Orange Juice (1L, Case of 12)",Beverages,12,15.6,187.2,North,2024-02-09
 
 
 

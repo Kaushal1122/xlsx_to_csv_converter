@@ -35,7 +35,7 @@ xlsx_to_csv_converter/
 
 ## Requirements
 
-- Python 3.10 or later
+- Python 3.13 or later
 - pip
 
 ## Installation
@@ -70,7 +70,7 @@ python -m pip install -r requirements.txt
 ### 1. Convert a local Excel file
 
 ```bash
-python converter.py path/to/workbook.xlsx
+python converter.py path/to/workbook
 ```
 
 ### 2. Convert a Google Sheets spreadsheet
