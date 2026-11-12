@@ -4,6 +4,7 @@ import csv
 import logging
 import re
 import sys
+import zipfile
 from email.message import Message
 from io import BytesIO
 from pathlib import Path
@@ -11,6 +12,7 @@ from urllib.parse import urlparse
 
 import requests
 from openpyxl import load_workbook
+from openpyxl.utils.exceptions import InvalidFileException
 
 logger = logging.getLogger(__name__)
 
@@ -174,6 +176,9 @@ def read_workbook(input_source, timeout):
     else:
         input_path = Path(input_source)
 
+        if not input_path.suffix:
+            input_path = input_path.with_suffix(".xlsx")
+
         if input_path.suffix.lower() != ".xlsx":
             raise ValueError(
                 "Input file must have an .xlsx extension."
@@ -190,7 +195,7 @@ def read_workbook(input_source, timeout):
     workbook = load_workbook(
         workbook_source,
         read_only=True,
-        data_only=False
+        data_only=True
     )
 
     try:
@@ -253,6 +258,18 @@ def get_unique_filename(sheet_name, used_names):
     return filename
 
 
+def normalize_row(row):
+    normalized_values = []
+
+    for value in row:
+        if isinstance(value, float) and value.is_integer():
+            value = int(value)
+
+        normalized_values.append(value)
+
+    return normalized_values
+
+
 def convert_workbook(worksheets, workbook_name, encoding):
     safe_workbook_name = sanitize_filename(workbook_name)
 
@@ -281,7 +298,10 @@ def convert_workbook(worksheets, workbook_name, encoding):
         ) as csv_file:
 
             writer = csv.writer(csv_file)
-            writer.writerows(rows)
+            writer.writerows(
+                normalize_row(row)
+                for row in rows
+            )
 
         converted_files.append(csv_path)
 
@@ -350,9 +370,39 @@ def main():
 
         return 0
 
-    except Exception:
+    except FileNotFoundError as error:
+        logger.exception("File not found")
+        print(f"Error: {error}")
+        return 1
+
+    except requests.RequestException as error:
+        logger.exception("Google Sheets download failed")
+        print(f"Download error: {error}")
+        return 1
+
+    except InvalidFileException as error:
+        logger.exception("Invalid Excel workbook")
+        print(f"Invalid Excel file: {error}")
+        return 1
+
+    except zipfile.BadZipFile as error:
+        logger.exception("Corrupted Excel workbook")
+        print(f"Corrupted Excel file: {error}")
+        return 1
+
+    except configparser.Error as error:
+        logger.exception("Configuration error")
+        print(f"Configuration error: {error}")
+        return 1
+
+    except UnicodeError as error:
+        logger.exception("Encoding error")
+        print(f"Encoding error: {error}")
+        return 1
+
+    except (csv.Error, ValueError, OSError) as error:
         logger.exception("Conversion failed")
-        print("Conversion failed. Check the log for details.")
+        print(f"Conversion error: {error}")
         return 1
 
 
